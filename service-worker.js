@@ -3,15 +3,15 @@
    Handles offline caching and PWA features
    ======================================== */
 
-const CACHE_NAME = 'spice-finder-v1.0.0';
+const CACHE_NAME = 'spice-finder-v1.0.1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/app.js',
-    '/manifest.json',
-    '/icon-192.png',
-    '/icon-512.png'
+    '/spice-finder/',
+    '/spice-finder/index.html',
+    '/spice-finder/styles.css',
+    '/spice-finder/app.js',
+    '/spice-finder/manifest.json',
+    '/spice-finder/android-chrome-192x192.png',
+    '/spice-finder/android-chrome-512x512.png'
 ];
 
 // Install event - cache assets
