@@ -1,0 +1,722 @@
+[
+  {
+    "name": "4 spice - french",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "allspice",
+    "location": "Island",
+    "notes": "2",
+    "refill": false
+  },
+  {
+    "name": "allspice - ground",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "allspice - whole",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "amchur",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "anise - whole",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "basil",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "bay leaf",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "bay leaf",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "berbere",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "black bean - sauce",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "black beans - fermented",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "black beans - fermented",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "caraway",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cardamom - ground",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cardamom - whole",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cayenne",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cayenne",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "celery seed",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "celery seed",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chili mix - japanese",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chili powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chilis - ancho",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chilis - chipolte",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chilis - guajilo",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chipotle powder",
+    "location": "Island",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "chipotle powder",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cinnamon",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cinnamon",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cinnamon - whole",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cloves - ground",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cloves - whole",
+    "location": "Stove",
+    "notes": "2",
+    "refill": false
+  },
+  {
+    "name": "coriander powder",
+    "location": "Island",
+    "notes": "2 + jar",
+    "refill": false
+  },
+  {
+    "name": "coriander seed",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "coriander seed",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "crushed red pepper",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "crushed red pepper",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cumin",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cumin",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cumin seeds",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "black cumin seed",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "curry powder",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "dill",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "dried mustard",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "extract - almond",
+    "location": "Stove",
+    "notes": "2",
+    "refill": false
+  },
+  {
+    "name": "extract - caramel",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "extract - orange",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "extract - peppermint",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "extract - vanilla",
+    "location": "Stove",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "fennel - ground",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "fennel seed",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "file",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "file",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "five spice - chinese",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "furikake",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "garam masala",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "garlic powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "garlic powder",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "ginger - ground",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "ginger - ground",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "ginger - whole dried",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "gravy master",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "herbs de provence",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "honey powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "italian seasoning",
+    "location": "Stove",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "joes stuff",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "kaffir lime leaves",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "liquid smoke",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mace",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mastekah",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "moraccan vegetable rub",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mrs. dash",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mushroom powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mushroom powder - porcini",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mustard powder - hot",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mustard seeds - black",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mustard seeds - brown",
+    "location": "Island",
+    "notes": "2",
+    "refill": false
+  },
+  {
+    "name": "mustard seeds - brown",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "nutmeg - whole",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "nutmeg - whole",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "old bay",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "onion powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "onion powder",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "oregano",
+    "location": "Island",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "oregano",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "paprika (spanish)",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "paprika - hot",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "paprika - smoked",
+    "location": "Island",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "paprika - smoked",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "paprika - spanish sweet",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pepper - aleppo",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pepper - ground black",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pepper - ground black",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pepper - white",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pepper - white",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "peppercorns - szechuan",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "peppercorns - whole black",
+    "location": "Island",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "peppercorns - whole black",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "peppermint leaf",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pickling spices",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "poppyseeds",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "red wine vinegar powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "rosemary",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "saffron",
+    "location": "Stove",
+    "notes": "2",
+    "refill": false
+  },
+  {
+    "name": "sage",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "salt - ghost pepper",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "salt - janes crazy",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "sesame seeds - roasted",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "star anise",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "thai seasoning",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "thyme",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "thyme",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "thyme - lemon",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "tomato powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "turmeric",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "turmeric",
+    "location": "Stove",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "vegetable flakes",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "vegetable seasoning",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "wasabi powder",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "za'atar",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  }
+]

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Data Import Tool - Spice Finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #FFF8DC 0%, #FFE4B5 100%);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(139, 69, 19, 0.1);
+        }
+
+        h1 {
+            color: #D2691E;
+            margin-bottom: 1rem;
+        }
+
+        .warning {
+            background: #FFF3CD;
+            border: 2px solid #FFE69C;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            color: #856404;
+        }
+
+        .warning strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            color: #A0522D;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #3E2723;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #DEB887;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: monospace;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #D2691E;
+        }
+
+        button {
+            background: #6B8E23;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #5a7a1f;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .status.success {
+            background: #D4EDDA;
+            border: 2px solid #C3E6CB;
+            color: #155724;
+            display: block;
+        }
+
+        .status.error {
+            background: #F8D7DA;
+            border: 2px solid #F5C6CB;
+            color: #721C24;
+            display: block;
+        }
+
+        .status.info {
+            background: #D1ECF1;
+            border: 2px solid #BEE5EB;
+            color: #0C5460;
+            display: block;
+        }
+
+        .progress {
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .instructions {
+            background: #E8F5E9;
+            border-left: 4px solid #6B8E23;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .instructions ol {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            background: #F5F5F5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #D2691E;
+        }
+    </style>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🌶️ Firebase Data Import Tool</h1>
+
+        <div class="warning">
+            <strong>⚠️ Important:</strong>
+            This tool will import all 118 spices into your Firebase database. Make sure you have configured your Firebase project first!
+        </div>
+
+        <div class="instructions">
+            <strong>Instructions:</strong>
+            <ol>
+                <li>Create a Firebase project at <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a></li>
+                <li>Create a Realtime Database in your Firebase project</li>
+                <li>Set database rules to public (see README for details)</li>
+                <li>Get your Firebase config from Project Settings</li>
+                <li>Paste your config values below</li>
+                <li>Click "Import Spices to Firebase"</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Firebase Configuration</h2>
+
+            <div class="form-group">
+                <label for="apiKey">API Key:</label>
+                <input type="text" id="apiKey" placeholder="AIzaSy...">
+            </div>
+
+            <div class="form-group">
+                <label for="projectId">Project ID:</label>
+                <input type="text" id="projectId" placeholder="your-project-id">
+            </div>
+
+            <div class="form-group">
+                <label for="databaseURL">Database URL:</label>
+                <input type="text" id="databaseURL" placeholder="https://your-project-id-default-rtdb.firebaseio.com">
+            </div>
+
+            <div class="form-group">
+                <label for="appId">App ID:</label>
+                <input type="text" id="appId" placeholder="1:123456789012:web:...">
+            </div>
+        </div>
+
+        <button id="importBtn">Import Spices to Firebase</button>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        // Spices data embedded in this file
+        const spicesData = [
+  {
+    "name": "4 spice - french",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "allspice",
+    "location": "Island",
+    "notes": "2",
+    "refill": false
+  },
+  {
+    "name": "allspice - ground",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "allspice - whole",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "amchur",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "anise - whole",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "basil",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "bay leaf",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "bay leaf",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "berbere",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "black bean - sauce",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "black beans - fermented",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "black beans - fermented",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "caraway",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cardamom - ground",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cardamom - whole",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cayenne",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cayenne",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "celery seed",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "celery seed",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chili mix - japanese",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chili powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chilis - ancho",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chilis - chipolte",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chilis - guajilo",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "chipotle powder",
+    "location": "Island",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "chipotle powder",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cinnamon",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cinnamon",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cinnamon - whole",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cloves - ground",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cloves - whole",
+    "location": "Stove",
+    "notes": "2",
+    "refill": false
+  },
+  {
+    "name": "coriander powder",
+    "location": "Island",
+    "notes": "2 + jar",
+    "refill": false
+  },
+  {
+    "name": "coriander seed",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "coriander seed",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "crushed red pepper",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "crushed red pepper",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cumin",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cumin",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "cumin seeds",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "black cumin seed",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "curry powder",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "dill",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "dried mustard",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "extract - almond",
+    "location": "Stove",
+    "notes": "2",
+    "refill": false
+  },
+  {
+    "name": "extract - caramel",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "extract - orange",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "extract - peppermint",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "extract - vanilla",
+    "location": "Stove",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "fennel - ground",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "fennel seed",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "file",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "file",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "five spice - chinese",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "furikake",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "garam masala",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "garlic powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "garlic powder",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "ginger - ground",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "ginger - ground",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "ginger - whole dried",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "gravy master",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "herbs de provence",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "honey powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "italian seasoning",
+    "location": "Stove",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "joes stuff",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "kaffir lime leaves",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "liquid smoke",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mace",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mastekah",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "moraccan vegetable rub",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mrs. dash",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mushroom powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mushroom powder - porcini",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mustard powder - hot",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mustard seeds - black",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "mustard seeds - brown",
+    "location": "Island",
+    "notes": "2",
+    "refill": false
+  },
+  {
+    "name": "mustard seeds - brown",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "nutmeg - whole",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "nutmeg - whole",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "old bay",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "onion powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "onion powder",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "oregano",
+    "location": "Island",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "oregano",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "paprika (spanish)",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "paprika - hot",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "paprika - smoked",
+    "location": "Island",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "paprika - smoked",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "paprika - spanish sweet",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pepper - aleppo",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pepper - ground black",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pepper - ground black",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pepper - white",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pepper - white",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "peppercorns - szechuan",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "peppercorns - whole black",
+    "location": "Island",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "peppercorns - whole black",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "peppermint leaf",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "pickling spices",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "poppyseeds",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "red wine vinegar powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "rosemary",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "saffron",
+    "location": "Stove",
+    "notes": "2",
+    "refill": false
+  },
+  {
+    "name": "sage",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "salt - ghost pepper",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "salt - janes crazy",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "sesame seeds - roasted",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "star anise",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "thai seasoning",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "thyme",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "thyme",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "thyme - lemon",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "tomato powder",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "turmeric",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "turmeric",
+    "location": "Stove",
+    "notes": "",
+    "refill": true
+  },
+  {
+    "name": "vegetable flakes",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "vegetable seasoning",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "wasabi powder",
+    "location": "Stove",
+    "notes": "",
+    "refill": false
+  },
+  {
+    "name": "za'atar",
+    "location": "Island",
+    "notes": "",
+    "refill": false
+  }
+];
+
+        const importBtn = document.getElementById('importBtn');
+        const statusDiv = document.getElementById('status');
+
+        importBtn.addEventListener('click', async () => {
+            // Get config values
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const projectId = document.getElementById('projectId').value.trim();
+            const databaseURL = document.getElementById('databaseURL').value.trim();
+            const appId = document.getElementById('appId').value.trim();
+
+            // Validate
+            if (!apiKey || !projectId || !databaseURL || !appId) {
+                showStatus('error', 'Please fill in all Firebase configuration fields!');
+                return;
+            }
+
+            // Disable button
+            importBtn.disabled = true;
+            importBtn.textContent = 'Importing...';
+
+            try {
+                // Initialize Firebase
+                const firebaseConfig = {
+                    apiKey: apiKey,
+                    authDomain: `${projectId}.firebaseapp.com`,
+                    databaseURL: databaseURL,
+                    projectId: projectId,
+                    storageBucket: `${projectId}.appspot.com`,
+                    messagingSenderId: "123456789012", // Placeholder
+                    appId: appId
+                };
+
+                firebase.initializeApp(firebaseConfig);
+                const database = firebase.database();
+                const spicesRef = database.ref('spices');
+
+                showStatus('info', 'Connecting to Firebase...');
+
+                // Import each spice
+                let count = 0;
+                for (const spice of spicesData) {
+                    await spicesRef.push(spice);
+                    count++;
+                    showStatus('info', `Importing spices... (${count}/${spicesData.length})`);
+                }
+
+                showStatus('success', `
+                    ✅ Success! Imported ${count} spices to Firebase!<br>
+                    <br>
+                    <strong>Next steps:</strong><br>
+                    1. Copy your Firebase config to app.js<br>
+                    2. Deploy your app to GitHub Pages<br>
+                    3. Enjoy tracking your spices!
+                `);
+
+            } catch (error) {
+                console.error('Import error:', error);
+                showStatus('error', `
+                    ❌ Error importing data: ${error.message}<br>
+                    <br>
+                    Make sure your Firebase database rules are set to public (for testing).
+                `);
+            } finally {
+                importBtn.disabled = false;
+                importBtn.textContent = 'Import Spices to Firebase';
+            }
+        });
+
+        function showStatus(type, message) {
+            statusDiv.className = `status ${type}`;
+            statusDiv.innerHTML = message;
+        }
+    </script>
+</body>
+</html>

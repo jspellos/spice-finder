@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Icon Generator - Spice Finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #FFF8DC 0%, #FFE4B5 100%);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(139, 69, 19, 0.1);
+        }
+
+        h1 {
+            color: #D2691E;
+            margin-bottom: 1rem;
+        }
+
+        .info {
+            background: #E8F5E9;
+            border-left: 4px solid #6B8E23;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .preview-item {
+            text-align: center;
+        }
+
+        .preview-item canvas {
+            border: 2px solid #DEB887;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1);
+        }
+
+        .preview-item p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #5D4037;
+        }
+
+        button {
+            background: #6B8E23;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #5a7a1f;
+            transform: translateY(-2px);
+        }
+
+        .download-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #DEB887;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌶️ PWA Icon Generator</h1>
+
+        <div class="info">
+            <strong>Instructions:</strong>
+            <ol style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li>Icons will be generated automatically when you load this page</li>
+                <li>Right-click each icon and "Save image as..."</li>
+                <li>Save with the exact name shown (e.g., icon-192.png)</li>
+                <li>Place all icons in your project root folder</li>
+            </ol>
+        </div>
+
+        <div class="preview-grid" id="iconGrid"></div>
+
+        <div class="download-section">
+            <p><strong>Note:</strong> These are simple placeholder icons. For a professional look, consider:</p>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li>Using <a href="https://favicon.io/favicon-generator/" target="_blank">Favicon.io</a> to create custom icons</li>
+                <li>Designing custom icons in Figma or Canva</li>
+                <li>Using <a href="https://www.pwabuilder.com/" target="_blank">PWA Builder</a> for professional icons</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        const iconGrid = document.getElementById('iconGrid');
+
+        // Generate icons for each size
+        sizes.forEach(size => {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#D2691E');
+            gradient.addColorStop(1, '#A0522D');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            // Draw chili pepper emoji or text
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.5}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🌶️', size / 2, size / 2);
+
+            // Add text for smaller sizes
+            if (size >= 192) {
+                ctx.font = `bold ${size * 0.15}px Arial`;
+                ctx.fillStyle = 'white';
+                ctx.fillText('SF', size / 2, size * 0.8);
+            }
+
+            // Create preview container
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+
+            const displayCanvas = canvas.cloneNode(true);
+            displayCanvas.style.width = '150px';
+            displayCanvas.style.height = '150px';
+
+            const label = document.createElement('p');
+            label.textContent = `icon-${size}.png`;
+
+            previewItem.appendChild(displayCanvas);
+            previewItem.appendChild(label);
+
+            // Add download link
+            const downloadLink = document.createElement('a');
+            downloadLink.href = canvas.toDataURL('image/png');
+            downloadLink.download = `icon-${size}.png`;
+            downloadLink.textContent = '⬇ Download';
+            downloadLink.style.display = 'inline-block';
+            downloadLink.style.marginTop = '0.5rem';
+            downloadLink.style.color = '#6B8E23';
+            downloadLink.style.fontWeight = '600';
+            downloadLink.style.textDecoration = 'none';
+            previewItem.appendChild(downloadLink);
+
+            iconGrid.appendChild(previewItem);
+        });
+
+        console.log('✅ Icons generated! Right-click to save each icon.');
+    </script>
+</body>
+</html>

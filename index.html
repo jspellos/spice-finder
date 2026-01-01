@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track your kitchen spices and find them quickly">
+    <meta name="theme-color" content="#D2691E">
+
+    <title>Spice Finder</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🌶️ Spice Finder</h1>
+            <p class="subtitle">Find your spices instantly</p>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Search spices (e.g., cumin)..."
+                autocomplete="off"
+            >
+            <button id="clearSearch" class="clear-btn" style="display: none;">✕</button>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Island">Island</button>
+            <button class="filter-btn" data-filter="Stove">Stove</button>
+            <button id="refillFilterBtn" class="filter-btn" data-filter="refill">Needs Refill</button>
+        </div>
+
+        <!-- Add Spice Button -->
+        <button id="addSpiceBtn" class="add-btn">+ Add New Spice</button>
+
+        <!-- Spice Count -->
+        <div class="spice-count">
+            <span id="spiceCount">Loading...</span>
+        </div>
+
+        <!-- Spice Cards Container -->
+        <div id="spicesContainer" class="spices-grid">
+            <div class="loading">Loading spices...</div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="spiceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Spice</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+
+            <form id="spiceForm">
+                <input type="hidden" id="spiceId">
+
+                <div class="form-group">
+                    <label for="spiceName">Spice Name *</label>
+                    <input
+                        type="text"
+                        id="spiceName"
+                        required
+                        placeholder="e.g., Cumin"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="spiceLocation">Location *</label>
+                    <select id="spiceLocation" required>
+                        <option value="">Select location...</option>
+                        <option value="Island">Island</option>
+                        <option value="Stove">Stove</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="spiceNotes">Notes (optional)</label>
+                    <input
+                        type="text"
+                        id="spiceNotes"
+                        placeholder="e.g., 2, jar, back shelf"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="spiceRefill">
+                        <span>Needs Refill</span>
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
+                    <button type="button" class="btn btn-danger" id="deleteBtn" style="display: none;">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content modal-small">
+            <h3>Delete Spice?</h3>
+            <p>Are you sure you want to delete <strong id="deleteSpiceName"></strong>?</p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Install Prompt (for PWA) -->
+    <div id="installPrompt" class="install-prompt" style="display: none;">
+        <div class="install-content">
+            <span>📱 Install Spice Finder on your device!</span>
+            <button id="installBtn" class="btn-install">Install</button>
+            <button id="dismissInstall" class="btn-dismiss">✕</button>
+        </div>
+    </div>
+
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+</html>
