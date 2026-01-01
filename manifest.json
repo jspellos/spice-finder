@@ -2,12 +2,12 @@
   "name": "Spice Finder - Kitchen Spice Tracker",
   "short_name": "Spice Finder",
   "description": "Track your kitchen spices and find them quickly while cooking",
-  "start_url": "/",
+  "start_url": "/spice-finder/",
   "display": "standalone",
   "background_color": "#FFF8DC",
   "theme_color": "#D2691E",
   "orientation": "portrait-primary",
-  "scope": "/",
+  "scope": "/spice-finder/",
   "icons": [
     {
       "src": "favicon-16x16.png",
